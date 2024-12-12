@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { QuestionMarkCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 
 interface CalculatorInputProps {
@@ -29,7 +29,7 @@ export const CalculatorInput = ({ onCalculate }: CalculatorInputProps) => {
   const InfoTooltip = ({ content }: { content: string }) => (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <QuestionMarkCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help inline-block ml-2" />
+        <HelpCircle className="h-4 w-4 text-gray-400 hover:text-gray-600 cursor-help inline-block ml-2" />
       </HoverCardTrigger>
       <HoverCardContent className="w-80 p-3">
         <p className="text-sm text-gray-600">{content}</p>
