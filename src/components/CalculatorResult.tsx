@@ -25,6 +25,14 @@ export const CalculatorResult = ({ amount, onReset }: CalculatorResultProps) => 
   const afterTax = amount * (1 - taxRate);
   const withTrust = afterTax * 1.2; // Example trust benefit calculation
 
+  // Environmental impact data
+  const environmentalImpact = {
+    co2Avoided: 48413,
+    treesPlanted: 2222,
+    coalNotBurned: 44,
+    vehiclesOffRoad: 10
+  };
+
   // Data for the area chart showing growth over time
   const timeSeriesData = Array.from({ length: 10 }, (_, i) => ({
     year: `Year ${i + 1}`,
@@ -81,6 +89,41 @@ export const CalculatorResult = ({ amount, onReset }: CalculatorResultProps) => 
               <p className="text-3xl font-bold">
                 ${withTrust.toLocaleString()}
               </p>
+            </div>
+
+            {/* Success Highlight Section */}
+            <div className="p-4 bg-green-50 rounded-lg border border-green-100">
+              <p className="text-lg font-semibold text-green-800">
+                Investment Benefits
+              </p>
+              <p className="text-sm text-green-600 mt-2">
+                By investing ${amount.toLocaleString()}, you could unlock benefits of ${(withTrust * 2.37).toLocaleString()} over 25+ years (237% ROI)
+              </p>
+            </div>
+
+            {/* Environmental Impact Section */}
+            <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <p className="text-lg font-semibold text-blue-800 mb-3">
+                Environmental Impact
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-sm text-blue-600">CO2 Avoided</p>
+                  <p className="text-lg font-bold text-blue-800">{environmentalImpact.co2Avoided.toLocaleString()} kg</p>
+                </div>
+                <div>
+                  <p className="text-sm text-blue-600">Trees Planted</p>
+                  <p className="text-lg font-bold text-blue-800">{environmentalImpact.treesPlanted.toLocaleString()}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-blue-600">Coal Not Burned</p>
+                  <p className="text-lg font-bold text-blue-800">{environmentalImpact.coalNotBurned} tons</p>
+                </div>
+                <div>
+                  <p className="text-sm text-blue-600">Vehicles Off Road</p>
+                  <p className="text-lg font-bold text-blue-800">{environmentalImpact.vehiclesOffRoad} annually</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -158,19 +201,22 @@ export const CalculatorResult = ({ amount, onReset }: CalculatorResultProps) => 
             <Download className="mr-2 h-4 w-4" />
             Download Report
           </Button>
-          <p className="text-sm text-center text-gray-500">
-            Get a detailed breakdown of your results, including next steps for maximizing savings.
-          </p>
-        </div>
+          
+          <Button 
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+          >
+            Request Contact
+          </Button>
 
-        <Button 
-          onClick={onReset}
-          variant="outline"
-          className="w-full"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Calculate Another
-        </Button>
+          <Button 
+            onClick={onReset}
+            variant="outline"
+            className="w-full"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Calculate Another
+          </Button>
+        </div>
       </div>
     </Card>
   );

@@ -77,3 +77,13 @@
 .gradient-bg {
   background: linear-gradient(135deg, #6366F1 0%, #93C5FD 100%);
 }
+
+.gradient-text {
+  background: linear-gradient(135deg, #6366F1 0%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-progress {
+  background: linear-gradient(90deg, #6366F1 0%, #34D399 100%);
+}
