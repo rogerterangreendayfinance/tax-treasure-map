@@ -17,7 +17,7 @@ export const ProgressBar = ({ currentStep, totalSteps, className }: ProgressBarP
       </div>
       <div className="h-2 bg-gray-200 rounded-full">
         <div
-          className="h-full bg-primary rounded-full transition-all duration-300"
+          className="h-full gradient-progress rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
