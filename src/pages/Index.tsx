@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { InitialForm } from "@/components/calculator/InitialForm";
-import { StateSelection } from "@/components/calculator/StateSelection";
+import { WelcomeScreen } from "@/components/calculator/WelcomeScreen";
 import { IncomeTypeSelection } from "@/components/calculator/IncomeTypeSelection";
+import { StateSelection } from "@/components/calculator/StateSelection";
 import { EarnedIncomeForm } from "@/components/calculator/EarnedIncomeForm";
 import { CalculatorResult } from "@/components/CalculatorResult";
 
-type CalculatorStep = 'initial' | 'income-type' | 'state' | 'earned-income' | 'results';
+type CalculatorStep = 'welcome' | 'income-type' | 'state' | 'earned-income' | 'results';
 
 interface UserData {
   name: string;
@@ -16,7 +16,7 @@ interface UserData {
 }
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<CalculatorStep>('initial');
+  const [currentStep, setCurrentStep] = useState<CalculatorStep>('welcome');
   const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
@@ -50,7 +50,7 @@ const Index = () => {
   };
 
   const handleReset = () => {
-    setCurrentStep('initial');
+    setCurrentStep('welcome');
     setUserData({
       name: '',
       email: '',
@@ -60,42 +60,25 @@ const Index = () => {
     });
   };
 
-  const handleBack = () => {
-    switch (currentStep) {
-      case 'income-type':
-        setCurrentStep('initial');
-        break;
-      case 'state':
-        setCurrentStep('income-type');
-        break;
-      case 'earned-income':
-        setCurrentStep('state');
-        break;
-      case 'results':
-        setCurrentStep(userData.incomeType === 'earned' ? 'earned-income' : 'state');
-        break;
-    }
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-50">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">
       <div className="w-full max-w-2xl mb-8 text-center">
-        <h1 className="text-4xl font-bold mb-2 text-green-700">
+        <h1 className="text-4xl font-bold mb-2 gradient-text font-lato">
           Renewable Energy Benefits Calculator
         </h1>
-        <p className="text-gray-600">
-          Evaluate the full benefits of purchasing commercial solar projects.
+        <p className="text-gray-600 text-lg">
+          Evaluate the full benefits of purchasing commercial solar projects
         </p>
       </div>
 
-      {currentStep === 'initial' && (
-        <InitialForm onSubmit={handleInitialSubmit} />
+      {currentStep === 'welcome' && (
+        <WelcomeScreen onSubmit={handleInitialSubmit} />
       )}
 
       {currentStep === 'income-type' && (
         <IncomeTypeSelection 
           onSelect={handleIncomeTypeSelect}
-          onBack={() => setCurrentStep('initial')}
+          onBack={() => setCurrentStep('welcome')}
         />
       )}
 
@@ -115,7 +98,7 @@ const Index = () => {
 
       {currentStep === 'results' && (
         <CalculatorResult
-          amount={150000} // This would come from your actual calculations
+          amount={150000}
           onReset={handleReset}
         />
       )}
